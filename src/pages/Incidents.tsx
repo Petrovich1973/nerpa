@@ -1,36 +1,32 @@
 import React from "react";
+import {AlertOutlined} from "@ant-design/icons";
+import {Checkbox} from "antd";
+import {CheckboxChangeEvent} from "antd/es/checkbox";
 
 const Component = () => {
-
-    const [data, setData] = React.useState([]);
-
-    React.useEffect(() => {
-        const getData = async () => {
-            try {
-                const res = await fetch('https://jsonplaceholder.typicode.com/comments')
-                const result = await res.json()
-                setData(result)
-            } catch (e) {
-                alert('error!')
-            }
-        }
-        getData()
-    }, [])
-
+    const onChange = (e: CheckboxChangeEvent) => {
+        console.log(`checked = ${e.target.checked}`)
+    }
     return (
         <main>
-            <h2>Инциденты</h2>
-            <div className={'scroll-box'}>
-                <div style={{padding: 20}}>
-                    {data
-                        .map(({email, name, body}, i) => (
-                            <div key={i}>
-                                {/*<span>{email}</span>*/}
-                                <span>{name}</span>
-                                {/*<span>{body}</span>*/}
-                            </div>
-                        ))}
+            <div className={'main-header'}>
+                <div className={'menu-header-title'}>
+                    <AlertOutlined style={{fontSize: 24, marginRight: 16, marginTop: 4}}/>
+                    <div className={'menu-header-title-label'}>
+                        <div className={'menu-header-title-name'}>Инциденты</div>
+                        <small className={"menu-header-title-description"}>
+                            Дежурный может быстро собрать группу разбора
+                        </small>
+                    </div>
                 </div>
+                <div className={'menu-header-controls'}>
+                    <div>
+                        <Checkbox onChange={onChange}>Только по моей группе</Checkbox>
+                    </div>
+                </div>
+            </div>
+            <div className={'scroll-box'} style={{padding: '20px 100px'}}>
+                content
             </div>
         </main>
     )
