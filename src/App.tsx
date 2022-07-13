@@ -1,26 +1,46 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {
+    Routes,
+    Route,
+    Navigate
+} from "react-router-dom";
+import './App.css'
+import Menu from "./components/Menu";
+import Header from "./components/Header";
+import {routes} from './routes'
+import {IRoute} from './interfaces'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+
+    const [collapsed, setCollapsed] = React.useState(false);
+
+    return (
+        <section className={'layout'}>
+            <Header onClick={() => setCollapsed(!collapsed)} collapsed={collapsed}/>
+            <section>
+                <aside className={'sidebar'} data-hide={collapsed}>
+                    <Menu/>
+                </aside>
+                <Routes>
+                    <Route
+                        path="/"
+                        element={<Navigate to="/incidents" />}
+                    />
+                    {routes.map((route: IRoute, index) => (
+                        <Route key={index} path={route.path} element={route.element}/>
+                    ))}
+                    <Route
+                        path="*"
+                        element={
+                            <main style={{padding: "20px"}}>
+                                <p>There's nothing here!</p>
+                            </main>
+                        }
+                    />
+                </Routes>
+            </section>
+        </section>
+    );
 }
 
 export default App;

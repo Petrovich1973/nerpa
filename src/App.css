@@ -1,38 +1,142 @@
-.App {
-  text-align: center;
+@import '~antd/dist/antd.css';
+
+.layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #d0d0d0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.layout > header {
+    padding: 4px 0;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    overflow: hidden;
+    background-color: #483F81;
+    color: #DEDFF6;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.layout > header .hamburger {
+    margin: 0 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.layout > header > .app-logo {
+    display: inherit;
+    margin-left: 20px;
+    transition: all 300ms ease-out;
 }
 
-.App-link {
-  color: #61dafb;
+.layout > header > .app-logo.aside-show {
+    margin-left: 176px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.layout > header > .app-title {
+    margin: 0 20px;
+    padding: 0;
+    color: inherit;
+    line-height: 1;
+}
+
+.layout > header > .app-title small {
+    opacity: .3;
+    font-size: 80%;
+}
+
+.layout > section {
+    display: flex;
+    flex-grow: 1;
+    height: 100%;
+    overflow: hidden;
+    background-color: #afaf7d;
+}
+
+.layout > section > aside {
+    flex-shrink: 0;
+    width: 300px;
+    max-height: 100%;
+    overflow: auto;
+    background-color: #ffffff;
+    transition: all 300ms ease-out;
+}
+
+.layout > section > aside[data-hide='true'] {
+    margin-right: -236px;
+    overflow: hidden;
+}
+
+.layout > section > main {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow: hidden;
+    height: 100%;
+    background-color: #F6F6F6;
+}
+
+.layout > section > main > h2 {
+    flex-shrink: 0;
+    margin: 0;
+    padding: 20px;
+}
+
+.menu-aside {
+    list-style: none;
+    margin: 40px 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-aside > * {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+    cursor: pointer;
+    color: inherit;
+}
+
+.menu-aside > *.active, .menu-aside > *:hover {
+    color: black;
+    background-color: #EBEBEB;
+}
+
+.menu-aside-item-title {
+    margin-right: 20px;
+    line-height: 1;
+    font-size: 18px;
+}
+
+.scroll-box {
+    overflow: auto;
+    max-height: 100%;
+}
+
+.scroll-box::-webkit-scrollbar {
+    width: 10px;
+}
+
+.scroll-box::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, .07);
+    border-radius: 100px;
+}
+
+.scroll-box::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, .2);
+    border-radius: 100px;
+}
+
+.list > * {
+    padding: 10px 20px;
+    font-size: 130%;
+}
+
+.list > * + * {
+    border-top: 1px solid #5121b2;
 }
