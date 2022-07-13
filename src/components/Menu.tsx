@@ -12,7 +12,7 @@ const Component: React.FC = () => {
                 .map((item: IRoute, index) => (
                     <NavLink
                         key={index}
-                        to={item.path}
+                        to={item.link}
                         className={({ isActive }) => (isActive ? 'active' : undefined)}>
                         {item.icon}
                         <span className={'menu-aside-item-title'}>{item.title}</span>

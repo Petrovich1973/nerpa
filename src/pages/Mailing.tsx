@@ -2,9 +2,15 @@ import React from "react";
 import {NotificationOutlined, InfoCircleOutlined} from "@ant-design/icons";
 import {Checkbox} from "antd";
 import {CheckboxChangeEvent} from "antd/es/checkbox";
-import { Button, Space } from 'antd'
+import {Button, Space} from 'antd'
+import {Link, useRoutes, useParams, useLocation, Route, Routes, Outlet} from "react-router-dom";
+
+import StartScreen from '../components/Mailing/StartScreen'
+import IncidentProm from "../components/Mailing/IncidentProm";
+import Implementation from "../components/Mailing/Implementation";
 
 const Component = () => {
+    let {pathname} = useLocation()
     const [checked, setChecked] = React.useState(true);
     const onChange = (e: CheckboxChangeEvent) => {
         setChecked(!checked)
@@ -27,25 +33,25 @@ const Component = () => {
                     </div>
                 </div>
             </div>
-            <div className={'scroll-box'} style={{padding: '20px 100px', height: '100%'}}>
-                <div style={{display: 'flex', flexDirection: 'column', alignItems: "center", justifyContent: "center", height: '70%'}}>
-                    <Space size={40}>
-                    <Button size="large" onClick={() => null}>
-                        Инцидент в ПРОМ
-                    </Button>
-                    <Button type="default" size="large" onClick={() => null}>
-                        Внедрение
-                    </Button>
-                    </Space>
-                    <p style={{display: 'flex', width: 500, flexDirection: 'column', alignItems: "center", justifyContent: "center", marginTop: 20}}>
-                        <span><InfoCircleOutlined /> Выбери для продолжения создания оповещения.</span>
-                        <small style={{textAlign: "center", lineHeight: 1, marginTop: 10, opacity: 0.7}}>
-                            В зависимости от выбора сценария, будут предложены
-                            соответствующие шаги и шаблон формы оповещения.
-                        </small>
-                    </p>
-                </div>
-            </div>
+            <Routes>
+                <Route
+                    element={<Outlet/>}
+                >
+                    <Route
+                        path={``}
+                        element={<StartScreen/>}
+                    />
+                    <Route
+                        path={`incident-prom`}
+                        element={<IncidentProm/>}
+                    />
+                    <Route
+                        path={`implementation`}
+                        element={<Implementation/>}
+                    />
+                </Route>
+
+            </Routes>
         </main>
     )
 }
